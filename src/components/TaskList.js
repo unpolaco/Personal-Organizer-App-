@@ -1,10 +1,17 @@
 import React from 'react'
 import Task from './Task'
 
-function TaskList() {
+function TaskList(props) {
   return (
     <div>
-      <Task />
+    <h2>Zadania do zrobienia</h2>
+    
+      {props.tasks.map(task => {
+        return (
+          <Task key={task.id} tasks={task} />
+        )
+      }
+      )}
     </div>
   )
 }

@@ -1,13 +1,13 @@
 import React from 'react'
 
-function Task() {
+function Task(props) {
+
   return (
-    <>
-      <div>Pierwsze zadanie</div>
-      <div>Drugie zadanie</div>
-      <div>Trzecie zadanie</div>
-    </>
+      <div>
+      {props.tasks.name}
+      </div>
+      
   )
 }
 
-export default Task
+export default Task;

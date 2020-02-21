@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class AddTask extends Component {
   state = {
-    newTask: "",
+
     }
   render() { 
     return ( 
