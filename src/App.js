@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
+import AddTask from './components/AddTask'
+import TasksLists from './components/TaskList'
 
+class App extends Component {
+  state={ }
+  render() {
+    return (
+      <>
+        <AddTask />
+        <TasksLists />
 
-function App() {
-  return (
-    <div className="App">
-
-
-    </div>
-  );
+      </>
+  )}
 }
 
 export default App;
