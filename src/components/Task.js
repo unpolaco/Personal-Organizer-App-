@@ -1,10 +1,10 @@
 import React from 'react'
 
 function Task(props) {
-
+  const {tasks} = props;
   return (
       <div>
-      {props.tasks.name}
+      {tasks.name}
       </div>
       
   )
