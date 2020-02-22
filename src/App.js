@@ -8,29 +8,55 @@ class App extends Component {
       {
         id: 0,
         name: "first task",
+        date: "2020-02-22",
         priority: false,
         done: false,
       },
       {
         id: 1,
         name: "second task",
+        date: "2020-02-28",
         priority: false,
         done: true,
       },
       {
         id: 2,
         name: "third task",
+        date: "2020-02-25",
         priority: true,
         done: false,
       }
     ]
    }
+
+   deleteTask = (id) => {
+    const tasks = [...this.state.tasks];
+    const index = tasks.findIndex(task => task.id === id);
+    tasks.splice(index, 1)
+    this.setState({
+      tasks,
+    })
+   }
+   doneTask = (id) => {
+    const tasks = [...this.state.tasks];
+    tasks[id].done = !tasks[id].done;
+    this.setState({
+      tasks,
+    })
+   }
+
+
   render() {
-    const {tasks} = this.state
+    const {tasks} = this.state;
     return (
       <>
+        <h2>Moja lista rzeczy do zrobienia</h2>
         <AddTask />
-        <TasksLists tasks={tasks}/>
+        <TasksLists 
+          tasks={tasks}
+          handleDeleteTask={this.deleteTask}
+          handleDoneTask={this.doneTask}
+          />
 
       </>
   )}
