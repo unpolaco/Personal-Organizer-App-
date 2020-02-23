@@ -44,14 +44,22 @@ class App extends Component {
       tasks,
     })
    }
-
+   addNewTask = (newTask) => {
+   const tasks = [...this.state.tasks]
+  //  tasks = tasks.push(newTask)
+  tasks.push(newTask)
+  this.setState({
+    tasks,
+  })
+  
+   }
 
   render() {
     const {tasks} = this.state;
     return (
       <>
         <h2>Moja lista rzeczy do zrobienia</h2>
-        <AddTask />
+        <AddTask addNewTask={this.addNewTask}/>
         <TasksLists 
           tasks={tasks}
           handleDeleteTask={this.deleteTask}

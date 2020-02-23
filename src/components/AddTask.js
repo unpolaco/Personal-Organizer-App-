@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
 class AddTask extends Component {
+  
   state = {
     newTaskName: "",
     newTaskDate: "",
     newTaskPriority: false,
-    newTask: "",
     }
+
+
 
     handleCheckPriority = () => {
       this.setState({
@@ -33,11 +35,12 @@ class AddTask extends Component {
         priority: newTaskPriority,
         done: false,
       }
-      this.setState({
-        newTask,
-      })
+      const addNewTask = this.props.addNewTask(newTask)
+      // console.log(addNewTask);
       console.log(newTask);
-      
+      // console.log(new Date().toIsoString());
+      const actualDate = new Date().toISOString().slice(0, 10);
+      console.log(actualDate);
     }
 
   render() { 
