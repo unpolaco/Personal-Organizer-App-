@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import AddTask from './components/AddTask'
 import TasksLists from './components/TaskList'
 
+
 class App extends Component {
   state={
     tasks: [
       {
-        id: 0,
         name: "first task",
         finishDate: "2020-02-22",
         createDate: "",
@@ -14,7 +14,6 @@ class App extends Component {
         done: false,
       },
       {
-        id: 1,
         name: "second task",
         finishDate: "2020-02-28",
         createDate: "",
@@ -22,7 +21,6 @@ class App extends Component {
         done: true,
       },
       {
-        id: 2,
         name: "third task",
         finishDate: "2020-02-25",
         createDate: "",

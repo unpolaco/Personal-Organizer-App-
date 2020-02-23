@@ -1,10 +1,11 @@
 import React from 'react'
+import uuid from 'uuid'
 
 function Task(props) {
   const {name, finishDate, createDate, id} = props.tasks;
   const {handleDoneTask, handleDeleteTask, handlePriorityTask} = props;
   return (
-      <div>
+      <div key={uuid.v4()} >
       {name}
       {finishDate}
       {createDate}
