@@ -1,12 +1,13 @@
 import React from 'react'
 
 function Task(props) {
-  const {name, date, id} = props.tasks;
+  const {name, finishDate, createDate, id} = props.tasks;
   const {handleDoneTask, handleDeleteTask} = props;
   return (
       <div>
       {name}
-      {date}
+      {finishDate}
+      {createDate}
       <button onClick={() => handleDoneTask(id)}>Zrobione</button>
       <button onClick={() => handleDeleteTask(id)}>Usuń</button>
       </div>

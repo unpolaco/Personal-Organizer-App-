@@ -4,7 +4,7 @@ class AddTask extends Component {
   
   state = {
     newTaskName: "",
-    newTaskDate: "",
+    newTaskFinishDate: "",
     newTaskPriority: false,
     }
 
@@ -22,25 +22,24 @@ class AddTask extends Component {
     }
     handleChangeDate = (e) => {
       this.setState({
-        date: e.target.value,
+        newTaskFinishDate: e.target.value,
       })
     }
 
     handleSubmit = (e) => {
       e.preventDefault()
-      const {newTaskName, newTaskDate, newTaskPriority} = this.state;
+      const actualDate = new Date().toISOString().slice(0, 10);
+
+      const {newTaskName, newTaskFinishDate, newTaskPriority} = this.state;
       const newTask = {
         name: newTaskName,
-        date: newTaskDate,
+        finishDate: newTaskFinishDate,
+        createDate: actualDate,
         priority: newTaskPriority,
         done: false,
       }
       const addNewTask = this.props.addNewTask(newTask)
-      // console.log(addNewTask);
-      console.log(newTask);
-      // console.log(new Date().toIsoString());
-      const actualDate = new Date().toISOString().slice(0, 10);
-      console.log(actualDate);
+
     }
 
   render() { 
@@ -48,7 +47,8 @@ class AddTask extends Component {
       <form>
         <input type="text" placeholder="Wpisz zadanie" onChange={this.handleChangeTaskName} />
         <input type="date" value={this.state.date} onChange={this.handleChangeDate} />
-        <input type="checkbox" onChange={this.handleCheckPriority} />
+        <input id="checkbox" type="checkbox" onChange={this.handleCheckPriority} />
+        <label htmlFor="checkbox">Ważne</label>
         <button onClick={this.handleSubmit} >Dodaj zadanie</button>
       </form>
      );

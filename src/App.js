@@ -8,21 +8,24 @@ class App extends Component {
       {
         id: 0,
         name: "first task",
-        date: "2020-02-22",
+        finishDate: "2020-02-22",
+        createDate: "",
         priority: false,
         done: false,
       },
       {
         id: 1,
         name: "second task",
-        date: "2020-02-28",
+        finishDate: "2020-02-28",
+        createDate: "",
         priority: false,
         done: true,
       },
       {
         id: 2,
         name: "third task",
-        date: "2020-02-25",
+        finishDate: "2020-02-25",
+        createDate: "",
         priority: true,
         done: false,
       }
@@ -45,13 +48,11 @@ class App extends Component {
     })
    }
    addNewTask = (newTask) => {
-   const tasks = [...this.state.tasks]
-  //  tasks = tasks.push(newTask)
-  tasks.push(newTask)
-  this.setState({
-    tasks,
-  })
-  
+    const tasks = [...this.state.tasks]
+    tasks.unshift(newTask)
+    this.setState({
+      tasks,
+    })
    }
 
   render() {
@@ -65,9 +66,7 @@ class App extends Component {
           handleDeleteTask={this.deleteTask}
           handleDoneTask={this.doneTask}
           />
-
       </>
   )}
 }
-
 export default App;
