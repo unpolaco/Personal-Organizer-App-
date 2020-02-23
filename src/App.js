@@ -47,6 +47,14 @@ class App extends Component {
       tasks,
     })
    }
+   priorityTask = (id) => {
+    const tasks = [...this.state.tasks];
+    tasks[id].priority = !tasks[id].priority;
+    this.setState({
+      tasks,
+   })
+  }
+
    addNewTask = (newTask) => {
     const tasks = [...this.state.tasks]
     tasks.unshift(newTask)
@@ -65,6 +73,7 @@ class App extends Component {
           tasks={tasks}
           handleDeleteTask={this.deleteTask}
           handleDoneTask={this.doneTask}
+          handlePriorityTask={this.priorityTask}
           />
       </>
   )}
