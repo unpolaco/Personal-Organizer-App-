@@ -27,7 +27,9 @@ class App extends Component {
         priority: true,
         done: false,
       }
-    ]
+    ],
+    sortByDateGrowing: false,
+    sortByNameGrowing: false,
    }
 
    deleteTask = (id) => {
@@ -60,6 +62,66 @@ class App extends Component {
       tasks,
     })
    }
+   sortByName = () => {
+     const tasks = [...this.state.tasks]
+     if(this.state.sortByNameGrowing==false){
+       tasks.sort((a, b) => {
+         if (a.name < b.name)
+        {return 1;}
+        if (a.name > b.name)
+        {return -1;} 
+        return 0
+        })
+       this.setState({
+         tasks,
+         sortByNameGrowing: true,
+       }) 
+     } else if(this.state.sortByNameGrowing==true){
+      tasks.sort((a, b) => {
+        if (a.name > b.name)
+       {return 1;}
+       if (a.name < b.name)
+       {return -1;} 
+       return 0
+       })
+      this.setState({
+        tasks,
+        sortByNameGrowing: false,
+      }) 
+     }
+  }
+  
+  sortByDate = () => {
+    const tasks = [...this.state.tasks]
+    if(this.state.sortByDateGrowing==false){
+      tasks.sort((a, b) => {
+        if (a.finishDate < b.finishDate)
+       {return 1;}
+       if (a.finishDate > b.finishDate)
+       {return -1;} 
+       return 0
+       })
+      this.setState({
+        tasks,
+        sortByDateGrowing: true,
+      }) 
+    } else if(this.state.sortByDateGrowing==true){
+     tasks.sort((a, b) => {
+       if (a.finishDate > b.finishDate)
+      {return 1;}
+      if (a.finishDate < b.finishDate)
+      {return -1;} 
+      return 0
+      })
+     this.setState({
+       tasks,
+       sortByDateGrowing: false,
+     }) 
+    }
+ }
+  
+
+
 
   render() {
     const {tasks} = this.state;
@@ -72,6 +134,8 @@ class App extends Component {
           handleDeleteTask={this.deleteTask}
           handleDoneTask={this.doneTask}
           handlePriorityTask={this.priorityTask}
+          handleSortName={this.sortByName}
+          handleSortDate={this.sortByDate}
           />
       </>
   )}
