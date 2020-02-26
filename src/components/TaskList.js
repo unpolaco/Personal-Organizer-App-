@@ -10,8 +10,7 @@ function TaskList(props) {
                 handleDeleteTask={handleDeleteTask} 
                 handleDoneTask={handleDoneTask} 
                 handlePriorityTask={handlePriorityTask}
-                key={uuid.v4()} 
-                // id={uuid.v4()} 
+                key={uuid.v4()}
                 tasks={task}/>)
   const doneList = tasks.filter(task => task.done);
   const doneTasks = doneList.map(task => <Task 
@@ -19,7 +18,6 @@ function TaskList(props) {
                 handleDoneTask={handleDoneTask} 
                 handlePriorityTask={handlePriorityTask}
                 key={uuid.v4()}
-                // id={uuid.v4()} 
                 tasks={task}/>)
                 
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import uuid from 'uuid'
+import styled from 'styled-components'
 
 function Task(props) {
   const {name, finishDate, createDate, id} = props.tasks;
@@ -9,8 +9,7 @@ function Task(props) {
       {name}
       {finishDate}
       {createDate}
-      {id}
-      
+
       <button onClick={() => handleDoneTask(id)}>Zrobione</button>
       <button onClick={() => handleDeleteTask(id)}>Usuń</button>
       <button onClick={() => handlePriorityTask(id)}>Ważne</button>
@@ -18,5 +17,6 @@ function Task(props) {
       
   )
 }
+
 
 export default Task;
