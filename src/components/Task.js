@@ -5,10 +5,12 @@ function Task(props) {
   const {name, finishDate, createDate, id} = props.tasks;
   const {handleDoneTask, handleDeleteTask, handlePriorityTask} = props;
   return (
-      <div key={uuid.v4()} >
+      <div >
       {name}
       {finishDate}
       {createDate}
+      {id}
+      
       <button onClick={() => handleDoneTask(id)}>Zrobione</button>
       <button onClick={() => handleDeleteTask(id)}>Usuń</button>
       <button onClick={() => handlePriorityTask(id)}>Ważne</button>

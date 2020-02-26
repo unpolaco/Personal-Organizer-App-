@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid'
 
 class AddTask extends Component {
   
@@ -37,6 +38,7 @@ class AddTask extends Component {
         createDate: actualDate,
         priority: newTaskPriority,
         done: false,
+        id: uuid.v4(),
       }
       const addNewTask = this.props.addNewTask(newTask)
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import Task from './Task'
+import uuid from 'uuid'
 
 function TaskList(props) {
   const {tasks, handlePriorityTask, handleDeleteTask, handleDoneTask, handleSortName, handleSortDate} = props;
@@ -9,14 +10,16 @@ function TaskList(props) {
                 handleDeleteTask={handleDeleteTask} 
                 handleDoneTask={handleDoneTask} 
                 handlePriorityTask={handlePriorityTask}
-                key={task.id} 
+                key={uuid.v4()} 
+                // id={uuid.v4()} 
                 tasks={task}/>)
   const doneList = tasks.filter(task => task.done);
   const doneTasks = doneList.map(task => <Task 
                 handleDeleteTask={handleDeleteTask} 
                 handleDoneTask={handleDoneTask} 
                 handlePriorityTask={handlePriorityTask}
-                key={task.id} 
+                key={uuid.v4()}
+                // id={uuid.v4()} 
                 tasks={task}/>)
                 
   return (

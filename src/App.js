@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AddTask from './components/AddTask'
 import TasksLists from './components/TaskList'
-
+import uuid from 'uuid'
 
 class App extends Component {
   state={
@@ -12,6 +12,7 @@ class App extends Component {
         createDate: "",
         priority: false,
         done: false,
+        id: uuid.v4(),
       },
       {
         name: "second task",
@@ -19,6 +20,7 @@ class App extends Component {
         createDate: "",
         priority: false,
         done: true,
+        id: uuid.v4(),
       },
       {
         name: "third task",
@@ -26,6 +28,7 @@ class App extends Component {
         createDate: "",
         priority: true,
         done: false,
+        id: uuid.v4(),
       }
     ],
     sortByDateGrowing: false,
@@ -34,7 +37,10 @@ class App extends Component {
 
    deleteTask = (id) => {
     const tasks = [...this.state.tasks];
+
     const index = tasks.findIndex(task => task.id === id);
+    console.log(index);
+    
     tasks.splice(index, 1)
     this.setState({
       tasks,
@@ -42,7 +48,8 @@ class App extends Component {
    }
    doneTask = (id) => {
     const tasks = [...this.state.tasks];
-    tasks[id].done = !tasks[id].done;
+    const index = tasks.findIndex(task => task.id === id);
+    tasks[index].done = !tasks[index].done;
     this.setState({
       tasks,
     })
@@ -54,7 +61,6 @@ class App extends Component {
       tasks,
    })
   }
-
    addNewTask = (newTask) => {
     const tasks = [...this.state.tasks]
     tasks.unshift(newTask)
@@ -62,67 +68,48 @@ class App extends Component {
       tasks,
     })
    }
-   sortByName = () => {
-     const tasks = [...this.state.tasks]
-     if(this.state.sortByNameGrowing==false){
-       tasks.sort((a, b) => {
-         if (a.name < b.name)
-        {return 1;}
-        if (a.name > b.name)
-        {return -1;} 
-        return 0
-        })
-       this.setState({
-         tasks,
-         sortByNameGrowing: true,
-       }) 
-     } else if(this.state.sortByNameGrowing==true){
-      tasks.sort((a, b) => {
-        if (a.name > b.name)
-       {return 1;}
-       if (a.name < b.name)
-       {return -1;} 
-       return 0
-       })
-      this.setState({
-        tasks,
-        sortByNameGrowing: false,
-      }) 
-     }
-  }
-  
-  sortByDate = () => {
+ 
+  nameSorting = (sortByGrowing) => {
     const tasks = [...this.state.tasks]
-    if(this.state.sortByDateGrowing==false){
-      tasks.sort((a, b) => {
-        if (a.finishDate < b.finishDate)
-       {return 1;}
-       if (a.finishDate > b.finishDate)
-       {return -1;} 
-       return 0
-       })
-      this.setState({
-        tasks,
-        sortByDateGrowing: true,
-      }) 
-    } else if(this.state.sortByDateGrowing==true){
-     tasks.sort((a, b) => {
-       if (a.finishDate > b.finishDate)
-      {return 1;}
-      if (a.finishDate < b.finishDate)
-      {return -1;} 
-      return 0
-      })
-     this.setState({
-       tasks,
-       sortByDateGrowing: false,
-     }) 
-    }
+    tasks.sort((a, b) => {
+      if (a.name < b.name) 
+        return sortByGrowing ? 1 : -1 
+      if (a.name > b.name)
+        return sortByGrowing ? -1 : 1 
+      return 0;
+     })
+     
+    this.setState({
+      tasks,
+      sortByNameGrowing: sortByGrowing ? true : false,
+    }) 
+  }
+
+  sortByName = () => {
+    let sortByGrowing
+    this.state.sortByNameGrowing ? this.nameSorting(sortByGrowing) : this.nameSorting(!sortByGrowing)
+ }
+
+  dateSorting = (sortByGrowing) => {
+    const tasks = [...this.state.tasks]
+    tasks.sort((a, b) => {
+      if (a.finishDate < b.finishDate) 
+        return sortByGrowing ? 1 : -1 
+      if (a.finishDate > b.finishDate)
+        return sortByGrowing ? -1 : 1 
+      return 0;
+     })
+    this.setState({
+      tasks,
+      sortByDateGrowing: sortByGrowing ? true : false,
+    }) 
+  }
+
+  sortByDate = () => {
+    let sortByGrowing
+    this.state.sortByDateGrowing ? this.dateSorting(sortByGrowing) : this.dateSorting(!sortByGrowing)
  }
   
-
-
-
   render() {
     const {tasks} = this.state;
     return (
