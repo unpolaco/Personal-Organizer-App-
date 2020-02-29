@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import AddTask from './components/AddTask'
 import TasksLists from './components/TaskList'
 import uuid from 'uuid'
+import styled, { createGlobalStyle } from 'styled-components'
 
 class App extends Component {
   state={
@@ -113,6 +114,7 @@ class App extends Component {
     const {tasks} = this.state;
     return (
       <>
+      <GlobalStyle />
         <h2>Moja lista rzeczy do zrobienia</h2>
         <AddTask addNewTask={this.addNewTask}/>
         <TasksLists 
@@ -122,8 +124,29 @@ class App extends Component {
           handlePriorityTask={this.priorityTask}
           handleSortName={this.sortByName}
           handleSortDate={this.sortByDate}
-          />
+          />         
       </>
   )}
 }
+
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ecf0f1;
+    color: #34495e;
+    font-size: 15px;
+    font-family: Lato, sans-serif;
+    text-align: center;
+    margin: auto;
+  }
+`
+
+
+
+
 export default App;
