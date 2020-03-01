@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid'
 import styled from 'styled-components'
+import moment from 'moment';
 
 class AddTask extends Component {
   
@@ -27,19 +28,20 @@ class AddTask extends Component {
     }
     handleSubmit = (e) => {
       e.preventDefault()
-      const actualDate = new Date().toISOString().slice(0, 10);
+      // const actualDate = new Date().toISOString().slice(0, 10);
 
-      const {newTaskName, newTaskFinishDate, newTaskPriority} = this.state;
+      const { newTaskName, newTaskFinishDate, newTaskPriority} = this.state;
+      const { now } = this.props;
       const newTask = {
         name: newTaskName,
         finishDate: newTaskFinishDate,
-        createDate: actualDate,
+        createDate: now,
         priority: newTaskPriority,
         done: false,
         id: uuid.v4(),
+        timeToFinishTask: moment(newTaskFinishDate).from(now),
       }
       const addNewTask = this.props.addNewTask(newTask)
-
     }
 
   render() { 

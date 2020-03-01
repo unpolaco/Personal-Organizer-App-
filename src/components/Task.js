@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 function Task(props) {
-  const {name, finishDate, createDate, id} = props.tasks;
+  const {name, finishDate, timeToFinishTask, id} = props.tasks;
   const {handleDoneTask, handleDeleteTask, handlePriorityTask} = props;
   return (
       <TaskItem >
         <TextWrapper >
           <Text big>{name}</Text>
-          <Text small>finish to: {finishDate}</Text>
-          {/* <Text text='small'>created- {createDate}</Text> */}
+          <Text small>data: {finishDate}</Text>
+          <Text small>do zrobienia {timeToFinishTask}</Text>
         </TextWrapper>
         <ButtonWrapper>
           <Button onClick={() => handleDoneTask(id)}>Zrobione</Button>
@@ -17,7 +17,6 @@ function Task(props) {
           <Button onClick={() => handlePriorityTask(id)}>Ważne</Button>
         </ButtonWrapper>
       </TaskItem>
-      
   )
 }
 const TaskItem= styled.div`
@@ -25,7 +24,6 @@ const TaskItem= styled.div`
   justify-content: space-between;
   margin: 2px 0;
   padding: 5px;
-
   border-left: 5px solid #2ecc71;
 `
 const ButtonWrapper= styled.div`

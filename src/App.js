@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import AddTask from './components/AddTask'
+import ActualDate from './components/ActualDate'
 import TasksLists from './components/TaskList'
 import uuid from 'uuid'
-import styled, { createGlobalStyle } from 'styled-components'
-
+import { createGlobalStyle } from 'styled-components'
+import moment from 'moment';
 class App extends Component {
   state={
     tasks: [
@@ -109,14 +110,21 @@ class App extends Component {
     let sortByGrowing
     this.state.sortByDateGrowing ? this.dateSorting(sortByGrowing) : this.dateSorting(!sortByGrowing)
  }
+ 
   
   render() {
+    const now = moment(new Date())
     const {tasks} = this.state;
     return (
       <>
       <GlobalStyle />
+      <div>
+        <ActualDate now={now}/>
         <h2>Moja lista rzeczy do zrobienia</h2>
-        <AddTask addNewTask={this.addNewTask}/>
+        <AddTask 
+          now={now} 
+          addNewTask={this.addNewTask}/>
+      </div>
         <TasksLists 
           tasks={tasks}
           handleDeleteTask={this.deleteTask}
@@ -128,7 +136,6 @@ class App extends Component {
       </>
   )}
 }
-
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -145,8 +152,5 @@ const GlobalStyle = createGlobalStyle`
     margin: auto;
   }
 `
-
-
-
 
 export default App;
