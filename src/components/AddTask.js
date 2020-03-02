@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import uuid from 'uuid'
 import styled from 'styled-components'
 import moment from 'moment';
+import AddIcon from '../icons/add'
 
 class AddTask extends Component {
   
@@ -28,7 +29,6 @@ class AddTask extends Component {
     }
     handleSubmit = (e) => {
       e.preventDefault()
-      // const actualDate = new Date().toISOString().slice(0, 10);
 
       const { newTaskName, newTaskFinishDate, newTaskPriority} = this.state;
       const { now } = this.props;
@@ -47,33 +47,75 @@ class AddTask extends Component {
   render() { 
     return ( 
       <AddTaskWrapper>
-        <Input type="text" placeholder="Wpisz zadanie" onChange={this.handleChangeTaskName} />
-        <Input type="date" value={this.state.date} onChange={this.handleChangeDate} />
-        <Input id="checkbox" type="checkbox" onChange={this.handleCheckPriority} />
-        <label htmlFor="checkbox">Ważne</label>
-        <Button onClick={this.handleSubmit} >Dodaj zadanie</Button>
+        <Input taskName type="text" placeholder="Wpisz zadanie" onChange={this.handleChangeTaskName} />
+        <InputDate 
+          min={this.props.now} 
+          id="dateInput" 
+          type="date" 
+          value={this.state.date} 
+          onChange={this.handleChangeDate}/>
+        <CheckboxWrapper>
+          <Input id="checkbox" type="checkbox" onChange= {this.handleCheckPriority} />
+          <label htmlFor="checkbox">Ważne</label>
+        </CheckboxWrapper>
+        <Button onClick={this.handleSubmit}><AddIcon/>Dodaj zadanie</Button>
       </AddTaskWrapper>
      );
   }
 }
 const AddTaskWrapper = styled.form`
   display: flex;
-  justify-content: space-around;
-  margin: 15px;
-  padding: 10px 50px;
-  width: 700px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 800px;
   background-color: #fff;
+  & > * {
+    border: none;
+    padding: 2px;
+    color: #34495e;
+  }
 `
 const Input = styled.input`
   border: none;
-  font-size: 15px;
-  font-family: Lato, sans-serif;
+  width: ${props => props.taskName ? "250px" : "100px"};
   text-align: left;
 `
+const CheckboxWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 70px;
+`
+const InputDate = styled.input`
+  background: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+  border: none;
+  &::-webkit-inner-spin-button {
+  display: none;
+  }
+  &::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  }
+`
 const Button = styled.button`
-    font-size: 14px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 150px;
     padding: 2px 10px;
-    font-family: Lato, sans-serif;
     margin: 2px 10px;
+    height: 100%;
+    background-color: #fff;
+  &:hover {
+    background-color: #ecf0f1;
+  }
+`
+const Icon = styled.img`
+  width: 22px;
+&:hover {
+  fill: black;
+  width: 25px;
+  }
 `
 export default AddTask;

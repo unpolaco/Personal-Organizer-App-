@@ -2,9 +2,12 @@ import React from 'react'
 import Task from './Task'
 import uuid from 'uuid'
 import styled from 'styled-components'
+import DownArrowIcon from '../icons/arrowDown'
+import UpArrowIcon from '../icons/arrowUp'
+
 
 function TaskList(props) {
-  const {tasks, handlePriorityTask, handleDeleteTask, handleDoneTask, handleSortName, handleSortDate} = props;
+  const {tasks, sortByNameGrowing, sortByDateGrowing, handlePriorityTask, handleDeleteTask, handleDoneTask, handleSortName, handleSortDate} = props;
   
   const activeList = tasks.filter(task => !task.done);
   const activeTasks = activeList.map(task => <Task 
@@ -25,11 +28,12 @@ function TaskList(props) {
     <TasksLists>
     <h2>Zadania do zrobienia</h2>
     <SortingButtonWrapper>
-      <Button onClick={handleSortName} >Sortuj po nazwie</  Button>
-      <Button onClick={handleSortDate}>Sortuj po dacie  ukończenia</Button>
+      <Button onClick={handleSortName}>Sortuj po nazwie{!sortByNameGrowing ? <DownArrowIcon/> : <UpArrowIcon/>}
+      </Button>
+      <Button onClick={handleSortDate}>Sortuj po dacie  {!sortByDateGrowing ? <DownArrowIcon/> : <UpArrowIcon/>}
+      </Button>
     </SortingButtonWrapper>
-      {activeTasks}
-   
+      {activeTasks}   
     <h2>Zadania zrobione</h2>
       {doneTasks}
     </TasksLists>
@@ -39,22 +43,25 @@ function TaskList(props) {
 const TasksLists = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: wrap;
   height: 400px;
-  margin: 15px;
+  margin-top: 15px;
   padding: 10px;
-  width: 800px;
   background-color: #fff;
 `
 const SortingButtonWrapper= styled.div`
   display: flex;
+  justify-content: flex-end;
 `
 const Button = styled.button`
-  flex-basis: 40%;
-  font-size: 14px;
-  padding: 2px 10px;
-  font-family: Lato, sans-serif;
-  margin: 2px 5px;
+  width: 200px;
+  height: 25px;
+  text-align: left;
+  border: none;
+  color: #34495e;
+  font-size: 15px;
 `
-
+const Icon = styled.img`
+  width: 15px;
+  fill: red;
+`
 export default TaskList;

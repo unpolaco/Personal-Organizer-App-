@@ -5,6 +5,7 @@ import TasksLists from './components/TaskList'
 import uuid from 'uuid'
 import { createGlobalStyle } from 'styled-components'
 import moment from 'moment';
+
 class App extends Component {
   state={
     tasks: [
@@ -57,7 +58,8 @@ class App extends Component {
    }
    priorityTask = (id) => {
     const tasks = [...this.state.tasks];
-    tasks[id].priority = !tasks[id].priority;
+    const index = tasks.findIndex(task => task.id === id);
+    tasks[index].priority = !tasks[index].priority;
     this.setState({
       tasks,
    })
@@ -114,12 +116,12 @@ class App extends Component {
   
   render() {
     const now = moment(new Date())
-    const {tasks} = this.state;
+    const {tasks, sortByDateGrowing, sortByNameGrowing} = this.state;
     return (
       <>
       <GlobalStyle />
-      <div>
         <ActualDate now={now}/>
+      <div>
         <h2>Moja lista rzeczy do zrobienia</h2>
         <AddTask 
           now={now} 
@@ -127,6 +129,8 @@ class App extends Component {
       </div>
         <TasksLists 
           tasks={tasks}
+          sortByDateGrowing={sortByDateGrowing}
+          sortByNameGrowing={sortByNameGrowing}
           handleDeleteTask={this.deleteTask}
           handleDoneTask={this.doneTask}
           handlePriorityTask={this.priorityTask}
@@ -141,15 +145,17 @@ const GlobalStyle = createGlobalStyle`
   body {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     background-color: #ecf0f1;
-    color: #34495e;
+    text-align: center;
+  & > * {
     font-size: 15px;
     font-family: Lato, sans-serif;
-    text-align: center;
-    margin: auto;
+    color: #34495e;
+  }
   }
 `
 
