@@ -1,15 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
-// import trashIcon from '../img/trash-outline.svg'
 import CheckMarkIcon from '../icons/checkmark.js'
 import ImportantIcon from '../icons/important.js'
 import TrashIcon from '../icons/trash.js'
 
 function Task(props) {
-  const {name, finishDate, timeToFinishTask, id} = props.tasks;
+  const {name, priority, finishDate, timeToFinishTask, id} = props.tasks;
   const {handleDoneTask, handleDeleteTask, handlePriorityTask} = props;
+
+ 
+
   return (
-      <TaskItem >
+      <TaskItem important={priority}>
         <TextWrapper >
           <TextTaskName big>{name}</TextTaskName>
           <Text small>data: {finishDate}</Text>
@@ -17,7 +19,11 @@ function Task(props) {
         </TextWrapper>
         <ButtonWrapper>
           <Button onClick={() => handleDoneTask(id)}><CheckMarkIcon/></Button>
-          <Button onClick={() => handleDeleteTask(id)}><TrashIcon fill="blue"/></Button>
+          <Button 
+            onClick={() => handleDeleteTask(id)}
+            // onMouseOver={this.mouseOver}
+            // onMouseOut={this.mouseOut}
+          ><TrashIcon fill="red"/></Button>
           <Button onClick={() => handlePriorityTask(id)}><ImportantIcon/></Button>
         </ButtonWrapper>
       </TaskItem>
@@ -27,21 +33,32 @@ const TaskItem= styled.div`
   display: flex;
   margin: 2px 0;
   padding: 5px;
-  border-left: 5px solid #2ecc71;
+  border-left: ${props => props.important ? '5px solid #e74c3c' : '5px solid #2ecc71'};
 `
 const ButtonWrapper= styled.div`
-  display: flex;
+  position: absolute;
   width: 120px;
-  justify-content: space-between;
 `
 const TextWrapper= styled.div`
   display: flex; 
   flex: 1;
+  max-width: 700px;
 `
 const Button = styled.button`
+  position: relative;
+  left: 690px;
+  top: 10px;
   padding: 2px 5px;
   background-color: #fff;
   border: none;
+  border: 1px solid black;
+  &:hover > * {
+  /* fill: green; */
+  stroke: red;
+  background-color: green;
+  color: red;
+  /* display: none; */
+}
 `
 const Text = styled.div`
   display: flex;
@@ -56,12 +73,16 @@ const TextTaskName = styled(Text)`
 `
 
 
-const Icon = styled.svg`
-  color: red;
-  fill: black;
-&:hover {
-  fill: black;
-  width: 18px;
-  }
-`
+// const TrashIcon = styled(TrashIcon)`
+//   width: 15px;
+//   color: red;
+//   fill: black;
+//   transition: transform 300ms ease-in-out;
+//   &:hover {
+//   /* fill: black; */
+//   /* stroke: green; */
+//   /* transform: translate() */
+//   width: 22px;
+//   }
+// `
 export default Task;
