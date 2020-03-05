@@ -3,35 +3,38 @@ import AddTask from './components/AddTask'
 import ActualDate from './components/ActualDate'
 import TasksLists from './components/TaskList'
 import uuid from 'uuid'
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import moment from 'moment';
 
 class App extends Component {
   state={
     tasks: [
       {
-        name: "first task",
+        name: "Pozmywać naczynia i powiesić firanki",
         finishDate: "2020-02-22",
         createDate: "",
         priority: false,
         done: false,
         id: uuid.v4(),
+        timeToFinishTask: 'za 2 dni'
       },
       {
-        name: "second task",
+        name: "Poznać React Hooks",
         finishDate: "2020-02-28",
         createDate: "",
         priority: false,
         done: true,
         id: uuid.v4(),
+        timeToFinishTask: 'za 2 dni'
       },
       {
-        name: "third task",
-        finishDate: "2020-02-25",
+        name: "Skończyć Task App przed zimą",
+        finishDate: "2020-12-10",
         createDate: "",
         priority: true,
         done: false,
         id: uuid.v4(),
+        timeToFinishTask: 'za 2 dni'
       }
     ],
     sortByDateGrowing: false,
@@ -122,7 +125,7 @@ class App extends Component {
       <GlobalStyle />
         <ActualDate now={now}/>
       <div>
-        <h2>Moja lista rzeczy do zrobienia</h2>
+        <Title>MOJA LISTA ZADAŃ</Title>
         <AddTask 
           now={now} 
           addNewTask={this.addNewTask}/>
@@ -153,10 +156,17 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
   & > * {
     font-size: 15px;
-    font-family: Lato, sans-serif;
+    font-family: 'Nunito', sans-serif;
     color: #34495e;
   }
+  * :focus {
+   outline: none; 
   }
+  }
+`
+const Title = styled.h2`
+font-size: 25px;
+color: #3498db;
 `
 
 export default App;

@@ -1,22 +1,16 @@
 import React from 'react'
 
-const Add = ({
-  fill ="none",
-  stroke ="#34495e",
-  width ="22px",
-}) => (
+const Add = () => (
 <svg 
 xmlns='http://www.w3.org/2000/svg' 
-width={width} 
-height={width} 
+width='20px' 
+height='20px' 
 viewBox='0 0 512 512'>
 <line 
 x1='256' 
 y1='112' 
 x2='256' 
 y2='400' 
-fill={fill} 
-stroke={stroke}
 strokeLinecap='round'
 strokeLinejoin='round'
 strokeWidth='32px'/>
@@ -25,8 +19,6 @@ x1='400'
 y1='256' 
 x2='112' 
 y2='256'
-fill={fill} 
-stroke={stroke}
 strokeLinecap='round'
 strokeLinejoin='round'
 strokeWidth='32px'/>

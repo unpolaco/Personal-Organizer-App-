@@ -3,6 +3,7 @@ import uuid from 'uuid'
 import styled from 'styled-components'
 import moment from 'moment';
 import AddIcon from '../icons/add'
+import StarOutlineIcon from '../icons/star-outline.js'
 
 class AddTask extends Component {
   
@@ -10,6 +11,7 @@ class AddTask extends Component {
     newTaskName: "",
     newTaskFinishDate: "",
     newTaskPriority: false,
+    isHovered: false,
     }
 
     handleCheckPriority = () => {
@@ -42,23 +44,43 @@ class AddTask extends Component {
         timeToFinishTask: moment(newTaskFinishDate).from(now),
       }
       const addNewTask = this.props.addNewTask(newTask)
+      this.setState({
+        newTaskName: "",
+      })
     }
+    mouseOver = () => this.setState({ isHovered: true, })
+    
+    mouseOut = () => this.setState({ isHovered: false, })
 
   render() { 
+    const { newTaskName, date} = this.state;
     return ( 
       <AddTaskWrapper>
-        <Input taskName type="text" placeholder="Wpisz zadanie" onChange={this.handleChangeTaskName} />
+        <Input 
+          autoFocus={true} 
+          taskName 
+          type="text" 
+          placeholder="Wpisz zadanie" 
+          value={newTaskName} 
+          onChange={this.handleChangeTaskName}/>
         <InputDate 
           min={this.props.now} 
           id="dateInput" 
           type="date" 
-          value={this.state.date} 
+          value={date} 
           onChange={this.handleChangeDate}/>
         <CheckboxWrapper>
-          <Input id="checkbox" type="checkbox" onChange= {this.handleCheckPriority} />
+          <Input 
+            id="checkbox" 
+            type="checkbox"
+             
+            onChange= {this.handleCheckPriority}/>
           <label htmlFor="checkbox">Ważne</label>
         </CheckboxWrapper>
-        <Button onClick={this.handleSubmit}><AddIcon/>Dodaj zadanie</Button>
+        <Button 
+          onClick={this.handleSubmit}>
+          <AddIcon/>Dodaj zadanie
+        </Button>
       </AddTaskWrapper>
      );
   }
@@ -80,6 +102,10 @@ const Input = styled.input`
   border: none;
   width: ${props => props.taskName ? "250px" : "100px"};
   text-align: left;
+  font-size: 17px;
+  &:hover {
+    color: #3498db;
+  }
 `
 const CheckboxWrapper = styled.div`
   display: flex;
@@ -87,10 +113,14 @@ const CheckboxWrapper = styled.div`
   align-items: center;
   height: 30px;
   width: 70px;
+  &:hover {
+    color: #3498db;
+  }
 `
 const InputDate = styled.input`
   background: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
   border: none;
+  width: 20px;
   &::-webkit-inner-spin-button {
   display: none;
   }
@@ -107,15 +137,15 @@ const Button = styled.button`
     margin: 2px 10px;
     height: 100%;
     background-color: #fff;
-  &:hover {
-    background-color: #ecf0f1;
+    font-size: 15px;
+  & > * {
+    stroke: #34495e;
   }
-`
-const Icon = styled.img`
-  width: 22px;
-&:hover {
-  fill: black;
-  width: 25px;
+  &:hover {
+    color: #3498db;
+  }
+  &:hover > * {
+    stroke: #3498db;
   }
 `
 export default AddTask;

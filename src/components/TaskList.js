@@ -22,11 +22,10 @@ function TaskList(props) {
                 handleDoneTask={handleDoneTask} 
                 handlePriorityTask={handlePriorityTask}
                 key={uuid.v4()}
-                tasks={task}/>)
-                
+                tasks={task}/>)         
   return (
     <TasksLists>
-    <h2>Zadania do zrobienia</h2>
+    <Title>ZADANIA DO ZROBIENIA</Title>
     <SortingButtonWrapper>
       <Button onClick={handleSortName}>Sortuj po nazwie{!sortByNameGrowing ? <DownArrowIcon/> : <UpArrowIcon/>}
       </Button>
@@ -34,12 +33,16 @@ function TaskList(props) {
       </Button>
     </SortingButtonWrapper>
       {activeTasks}   
-    <h2>Zadania zrobione</h2>
+    <Title>ZADANIA ZROBIONE</Title>
       {doneTasks}
     </TasksLists>
   )
 }
 
+const Title = styled.h2`
+font-size: 20px;
+color: #34495e;
+`
 const TasksLists = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,9 +62,15 @@ const Button = styled.button`
   border: none;
   color: #34495e;
   font-size: 15px;
-`
-const Icon = styled.img`
-  width: 15px;
-  fill: red;
+ 
+  & > * {
+    fill: #34495e;
+    /* stroke: #34495e; */
+ 
+}
+  &:hover > * {
+    fill: #3498db;
+    /* stroke: #3498db; */
+}
 `
 export default TaskList;
