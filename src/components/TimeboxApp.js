@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Clock from './Clock'
 
 
-class Timebox extends React.Component {
+class TimeboxApp extends React.Component {
 
   render() {
     return (
@@ -91,4 +91,4 @@ const Button = styled.button`
 `
 
 
-export default Timebox;
+export default TimeboxApp;
