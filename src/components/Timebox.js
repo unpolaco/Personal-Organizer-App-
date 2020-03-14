@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import Clock from './Clock'
+
 
 class Timebox extends React.Component {
 
@@ -16,10 +18,7 @@ class Timebox extends React.Component {
         </TimeboxEditor>
         <TimeboxElement>
           <p>Dodaje Timeboxa</p>
-          <p>Pozostało 13:00</p>
-          <ProgressBar>
-            <ProgressIndicator></ProgressIndicator>
-          </ProgressBar>
+          <Clock />
           <ButtonWrapper>
             <Button>Start</Button>
             <Button>Pauza</Button>
@@ -90,15 +89,6 @@ const Button = styled.button`
     stroke: #3498db;
   }
 `
-const ProgressBar = styled.div`
-  border: 1px solid #3498db;
-  height: 25px;
-  width: 80%;
-  padding: 5px;
-`
-const ProgressIndicator = styled.div`
-height: 25px;
-background-color: #3498db;
-`
+
 
 export default Timebox;
