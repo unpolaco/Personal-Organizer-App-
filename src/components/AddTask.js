@@ -100,7 +100,7 @@ const AddTaskWrapper = styled.form`
 `
 const Input = styled.input`
   border: none;
-  width: ${props => props.taskName ? "250px" : "100px"};
+  width: ${props => props.taskName ? "300px" : "100px"};
   text-align: left;
   font-size: 17px;
   &:hover {
