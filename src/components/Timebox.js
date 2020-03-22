@@ -7,25 +7,32 @@ state = {
   isRunning: false,
   isPaused: false,
   elapsedTimeInSeconds: 0,
+  pausesCounter: 0,
 }
 
 handleStart = () => {
   this.setState({
     isRunning: true,
+    isPaused: false,
   })
 }
 handlePause = () => {
-  this.setState({
-    isPaused: true,
+  this.setState( prevState => ({
+    isPaused: !prevState.isPaused,
+    pausesCounter: this.state.isPaused ? prevState.pausesCounter + 1 : prevState.pausesCounter,
   })
+  )
 }
 handleStop = () => {
   this.setState({
     isRunning: false,
+    isPaused: false,
+    pausesCounter: 0,
   })
 }
 
 render() {
+  const { pausesCounter } = this.state;
 	return (
 		<TimeboxWrapper>
 			<p>Dodaje Timeboxa</p>
@@ -35,7 +42,7 @@ render() {
 				<Button onClick={this.handlePause}>Pauza</Button>
 				<Button onClick={this.handleStop}>Stop</Button>
 			</ButtonWrapper>
-			<p>Liczba przerw: 2</p>
+			<p>Liczba przerw: {pausesCounter}</p>
 		</TimeboxWrapper>
 	)
 }
