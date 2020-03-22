@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Clock from './Clock'
-
+import Timebox from './Timebox'
 
 class TimeboxApp extends React.Component {
+  state = {
+
+  }
 
   render() {
     return (
@@ -16,16 +18,7 @@ class TimeboxApp extends React.Component {
           {/* <label for="setTime">Ustaw czas</label> */}
           <Button>Dodaj</Button>
         </TimeboxEditor>
-        <TimeboxElement>
-          <p>Dodaje Timeboxa</p>
-          <Clock />
-          <ButtonWrapper>
-            <Button>Start</Button>
-            <Button>Pauza</Button>
-            <Button>Stop</Button>
-          </ButtonWrapper>
-          <p>Liczba przerw: 2</p>
-        </TimeboxElement>
+        <Timebox/>
       </TimeboxWrapper>
     )
   }
@@ -45,17 +38,6 @@ const TimeboxEditor = styled.div`
 display: flex;
 padding: 10px 0;
 justify-content: center;
-`
-const TimeboxElement = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
-border: 1px solid grey;
-`
-const ButtonWrapper = styled.div`
-display: flex;
-justify-content: center;
-padding: 15px;
 `
 const Input = styled.input`
   border: none;
