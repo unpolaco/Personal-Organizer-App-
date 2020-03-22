@@ -55,9 +55,10 @@ export default class Timebox extends React.Component {
 
 	render() {
 		const { pausesCounter } = this.state;
+		const { taskName } = this.props;
 		return (
 			<TimeboxWrapper>
-				<p>Dodaje Timeboxa</p>
+				<p>{taskName}</p>
 				<Clock />
 				<ButtonWrapper>
 					<Button onClick={this.handleStart}>Start</Button>
