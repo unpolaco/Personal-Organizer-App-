@@ -143,6 +143,7 @@ const Button = styled.button`
   }
   &:hover {
     color: #3498db;
+    border: 1px solid #3498db;
   }
   &:hover > * {
     stroke: #3498db;

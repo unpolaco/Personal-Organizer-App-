@@ -1,12 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Clock() {
+export default function Clock(props) {
+  const { hoursLeft, minutesLeft, secondsLeft, progressInPercent } = props;
+  const hh = hoursLeft<10 ? "0"+ hoursLeft : hoursLeft;
+  const mm = minutesLeft<10 ? "0"+ minutesLeft : minutesLeft;
+  const ss = secondsLeft<10 ? "0"+ secondsLeft : secondsLeft;
+
+
   return (
     <ClockWrapper>
-      <p>Pozostało 13:00</p>
+      <p>Pozostało {hh}:{mm}:{ss}</p>
       <ProgressBar>
-        <ProgressIndicator></ProgressIndicator>
+        <ProgressIndicator style={{width: `${progressInPercent}%`}}></ProgressIndicator>
       </ProgressBar>
     </ClockWrapper>
   )

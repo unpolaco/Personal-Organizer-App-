@@ -25,7 +25,7 @@ export default class TimeboxApp extends React.Component {
     const { taskName, taskTimeInMinutes } = this.state;
     return (
       <TimeboxWrapper>
-        <TimeboxEditor 
+        <TimeboxEditor
           onNameChange={this.handleNameChange} 
           taskName={taskName} 
           onTimeChange={this.handleTimeChange} 
@@ -33,6 +33,7 @@ export default class TimeboxApp extends React.Component {
         />
         <Timebox
           taskName={taskName}
+          taskTimeInMinutes={taskTimeInMinutes}
         />
       </TimeboxWrapper>
     )

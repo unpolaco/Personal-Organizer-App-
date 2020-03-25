@@ -7,7 +7,7 @@ export default class Timebox extends React.Component {
 		isRunning: false,
 		isPaused: false,
 		elapsedTimeInSeconds: 0,
-		pausesCounter: 0
+		pausesCounter: 0,
 	};
 
 	handleStart = () => {
@@ -42,24 +42,42 @@ export default class Timebox extends React.Component {
 		});
 		this.stopTimer();
 	};
-	startTimer = () => {
-		this.intervalId = window.setInterval(() => {
-			this.setState(prevState => ({
-				elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 1
-			}));
-		}, 1000);
-	};
+
 	stopTimer = () => {
 		window.clearInterval(this.intervalId);
 	};
 
+	startTimer = () => {
+		this.intervalId = window.setInterval(() => {
+			this.setState(prevState => ({
+				elapsedTimeInSeconds: prevState.elapsedTimeInSeconds + 0.1
+			}));
+		}, 100.0);
+
+	};
+	
+
 	render() {
-		const { pausesCounter } = this.state;
-		const { taskName } = this.props;
+		const { pausesCounter, elapsedTimeInSeconds } = this.state;
+		const { taskName, taskTimeInMinutes } = this.props;
+		const totalTimeInSeconds = taskTimeInMinutes * 60;
+		const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
+		const hoursLeft = Math.floor(timeLeftInSeconds / 3600);
+		const minutesLeft = Math.floor((timeLeftInSeconds % 3600) / 60);
+		const secondsLeft = Math.floor(timeLeftInSeconds % 60);
+		const progressInPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
+		
 		return (
 			<TimeboxWrapper>
 				<p>{taskName}</p>
-				<Clock />
+				<p>{taskTimeInMinutes}min</p>
+				<Clock
+					hoursLeft={hoursLeft}
+					minutesLeft={minutesLeft}
+					secondsLeft={secondsLeft}
+					progressInPercent={progressInPercent}
+					stopTimer={this.stopTimer}
+				/>
 				<ButtonWrapper>
 					<Button onClick={this.handleStart}>Start</Button>
 					<Button onClick={this.handlePause}>Pauza</Button>
@@ -92,6 +110,7 @@ const Button = styled.button`
 	}
 	&:hover {
 		color: #3498db;
+		border: 1px solid #3498db;
 	}
 	&:hover > * {
 		stroke: #3498db;
