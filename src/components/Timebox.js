@@ -59,7 +59,7 @@ export default class Timebox extends React.Component {
 
 	render() {
 		const { pausesCounter, elapsedTimeInSeconds } = this.state;
-		const { taskName, taskTimeInMinutes } = this.props;
+		const { taskName, taskTimeInMinutes, onDelete } = this.props;
 		const totalTimeInSeconds = taskTimeInMinutes * 60;
 		const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
 		const hoursLeft = Math.floor(timeLeftInSeconds / 3600);
@@ -81,7 +81,9 @@ export default class Timebox extends React.Component {
 				<ButtonWrapper>
 					<Button onClick={this.handleStart}>Start</Button>
 					<Button onClick={this.handlePause}>Pauza</Button>
-					<Button onClick={this.handleStop}>Stop</Button>
+					<Button onClick={this.handleStop}>Stop</Button> 
+					<Button onClick={onDelete}>Usuń</Button>
+					<Button >Edytuj</Button>
 				</ButtonWrapper>
 				<p>Liczba przerw: {pausesCounter}</p>
 			</TimeboxWrapper>

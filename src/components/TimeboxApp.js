@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Timebox from './Timebox'
 import TimeboxEditor from './TimeboxEditor'
+import TimeboxList from './TimeboxList'
 
 export default class TimeboxApp extends React.Component {
   state = {
@@ -35,6 +36,7 @@ export default class TimeboxApp extends React.Component {
           taskName={taskName}
           taskTimeInMinutes={taskTimeInMinutes}
         />
+        <TimeboxList/>
       </TimeboxWrapper>
     )
   }
