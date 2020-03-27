@@ -6,36 +6,36 @@ import TimeboxList from './TimeboxList'
 
 export default class TimeboxApp extends React.Component {
   state = {
-    taskName: "",
-    taskTimeInMinutes: "",
+    timeboxName: "",
+    timeboxTimeInMinutes: "",
   }
 
   handleNameChange = (e) => {
     this.setState({
-      taskName: e.target.value,
+      timeboxName: e.target.value,
     })
   }
   handleTimeChange = (e) => {
     this.setState({
-      taskTimeInMinutes: e.target.value,
+      timeboxTimeInMinutes: e.target.value,
     })
   }
 
 
   render() {
-    const { taskName, taskTimeInMinutes } = this.state;
+    const { timeboxName, timeboxTimeInMinutes } = this.state;
     return (
       <TimeboxWrapper>
-        <TimeboxEditor
+        {/* <TimeboxEditor
           onNameChange={this.handleNameChange} 
-          taskName={taskName} 
+          timeboxName={timeboxName} 
           onTimeChange={this.handleTimeChange} 
-          taskTimeInMinutes={taskTimeInMinutes}
+          timeboxTimeInMinutes={timeboxTimeInMinutes}
         />
         <Timebox
-          taskName={taskName}
-          taskTimeInMinutes={taskTimeInMinutes}
-        />
+          timeboxName={timeboxName}
+          timeboxTimeInMinutes={timeboxTimeInMinutes}
+        /> */}
         <TimeboxList/>
       </TimeboxWrapper>
     )

@@ -58,9 +58,9 @@ export default class Timebox extends React.Component {
 	
 
 	render() {
-		const { pausesCounter, elapsedTimeInSeconds } = this.state;
-		const { taskName, taskTimeInMinutes, onDelete } = this.props;
-		const totalTimeInSeconds = taskTimeInMinutes * 60;
+		const { pausesCounter, elapsedTimeInSeconds, isRunning, isPaused } = this.state;
+		const { timeboxName, timeboxTimeInMinutes, onDelete } = this.props;
+		const totalTimeInSeconds = timeboxTimeInMinutes * 60;
 		const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
 		const hoursLeft = Math.floor(timeLeftInSeconds / 3600);
 		const minutesLeft = Math.floor((timeLeftInSeconds % 3600) / 60);
@@ -69,27 +69,51 @@ export default class Timebox extends React.Component {
 		
 		return (
 			<TimeboxWrapper>
-				<p>{taskName}</p>
-				<p>{taskTimeInMinutes}min</p>
-				<Clock
-					hoursLeft={hoursLeft}
-					minutesLeft={minutesLeft}
-					secondsLeft={secondsLeft}
-					progressInPercent={progressInPercent}
-					stopTimer={this.stopTimer}
-				/>
-				<ButtonWrapper>
-					<Button onClick={this.handleStart}>Start</Button>
-					<Button onClick={this.handlePause}>Pauza</Button>
-					<Button onClick={this.handleStop}>Stop</Button> 
-					<Button onClick={onDelete}>Usuń</Button>
-					<Button >Edytuj</Button>
-				</ButtonWrapper>
-				<p>Liczba przerw: {pausesCounter}</p>
+				<UnhiddenWrapper>
+					<div>{timeboxName}</div>
+					<p>{timeboxTimeInMinutes}min</p>
+				</UnhiddenWrapper>
+				<WrapperHidden>
+					<Clock
+						hoursLeft={hoursLeft}
+						minutesLeft={minutesLeft}
+						secondsLeft={secondsLeft}
+						progressInPercent={progressInPercent}
+						stopTimer={this.stopTimer}
+					/>
+					<ButtonWrapper >
+						<Button onClick={this.handleStart} disabled={isRunning}>Start</Button>
+						<Button onClick={this.handlePause} disabled={!isRunning}>{isPaused ? "Wznów" : "Pauza"}</Button>
+						<Button onClick={this.handleStop} disabled={!isRunning}>Stop</Button> 
+						<Button onClick={onDelete} >Usuń</Button>
+						<Button >Edytuj</Button>
+					</ButtonWrapper>
+					<p>Liczba przerw: {pausesCounter}</p>
+				</WrapperHidden>
 			</TimeboxWrapper>
 		);
 	}
 }
+const UnhiddenWrapper= styled.div`
+	width: 100%;
+&:hover + div {
+	visibility: visible;
+	opacity: 1;
+	height: 196px;
+	transition: visibility 0s, opacity 1s, height 0.1s ease-in-out;
+}
+`
+const WrapperHidden = styled.div`
+	visibility: hidden; 
+	opacity: 0;
+  height: 0;
+	&:hover {
+	visibility: visible;
+	opacity: 1;
+	height: 196px;
+	transition: visibility 0s, opacity 1s ease-in-out;
+}
+`
 
 const ButtonWrapper = styled.div`
 	display: flex;
@@ -118,9 +142,10 @@ const Button = styled.button`
 		stroke: #3498db;
 	}
 `;
+
 const TimeboxWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	border: 1px solid grey;
-`;
+`

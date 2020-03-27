@@ -2,18 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function TimeboxEditor(props) {
-  const { onNameChange, taskName, onTimeChange, taskTimeInMinutes } = props;
+  const { onNameChange, timeboxName, onTimeChange, timeboxTimeInMinutes } = props;
 	return (
 		<TimeboxEditorWrapper>
 			<Input
 				type='text'
 				onChange={onNameChange}
-        value={taskName}
+        value={timeboxName}
 			/>
 			<Input 
         type='number' 
         onChange={onTimeChange}
-        value={taskTimeInMinutes}
+        value={timeboxTimeInMinutes}
       />
 			<Button>Dodaj</Button>
 		</TimeboxEditorWrapper>
@@ -28,7 +28,7 @@ justify-content: center;
 `
 const Input = styled.input`
   border: none;
-  width: ${props => props.taskName ? "250px" : "100px"};
+  width: ${props => props.timeboxName ? "250px" : "100px"};
   text-align: left;
   font-size: 17px;
   padding: 0 5px;
