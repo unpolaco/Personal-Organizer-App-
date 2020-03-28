@@ -23,6 +23,7 @@ state = {
       id: uuid.v4(),
       timeboxName: this.state.newTimeboxName,
       timeboxTimeInMinutes: this.state.newTimeboxTime,
+      active: true,
     })
     this.setState({
       newTimeboxName: "",

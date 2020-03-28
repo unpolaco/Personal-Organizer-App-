@@ -7,11 +7,11 @@ import uuid from 'uuid';
 export default class TimeboxList extends Component {
   state = {
     timeboxes: [
-      {id:0, timeboxName: "Pierwszy timebox", timeboxTimeInMinutes: "23"},
-      {id:1, timeboxName: "Drugi timebox", timeboxTimeInMinutes: "2"},
-      {id:2, timeboxName: "Trzeci timebox", timeboxTimeInMinutes: "12"},
-      
-    ]
+      {id:0, timeboxName: "Pierwszy timebox", timeboxTimeInMinutes: "23", active: false,},
+      {id:1, timeboxName: "Drugi timebox", timeboxTimeInMinutes: "2", active: false},
+      {id:2, timeboxName: "Trzeci timebox", timeboxTimeInMinutes: "12", active: false},
+    ],
+    activeTimeboxId: "",
   }
 
   handleDelete = (indexToDelete) => {
@@ -30,6 +30,18 @@ export default class TimeboxList extends Component {
       this.addTimebox(newTimebox)
     }
 
+  setActiveTimebox = (activeIndex) => {
+    this.setState(prevState => {
+      const timeboxes = [...prevState.timeboxes]
+      timeboxes.map(timebox => timebox.active = false)
+      timeboxes[activeIndex].active = true;
+      return timeboxes;
+    })
+  }
+  handleSetActiveTimebox = (index) => {
+    this.setActiveTimebox(index)
+  }
+
   render() {
     return (
       <>
@@ -41,8 +53,9 @@ export default class TimeboxList extends Component {
             key={uuid.v4()}
             timeboxName={timebox.timeboxName}
             timeboxTimeInMinutes={timebox.timeboxTimeInMinutes}
+            isActive={timebox.active}
             onDelete={() => this.handleDelete(index)}
-
+            onSetActiveTimebox={() => this.handleSetActiveTimebox(index)}
           />
         ))}
       </>

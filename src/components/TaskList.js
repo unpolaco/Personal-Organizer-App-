@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import DownArrowIcon from '../icons/arrowDown'
 import UpArrowIcon from '../icons/arrowUp'
 
-
 function TaskList(props) {
   const {tasks, sortByNameGrowing, sortByDateGrowing, handlePriorityTask, handleDeleteTask, handleDoneTask, handleSortName, handleSortDate} = props;
   

@@ -59,7 +59,7 @@ export default class Timebox extends React.Component {
 
 	render() {
 		const { pausesCounter, elapsedTimeInSeconds, isRunning, isPaused } = this.state;
-		const { timeboxName, timeboxTimeInMinutes, onDelete } = this.props;
+		const { timeboxName, timeboxTimeInMinutes, isActive, onDelete, onSetActiveTimebox } = this.props;
 		const totalTimeInSeconds = timeboxTimeInMinutes * 60;
 		const timeLeftInSeconds = totalTimeInSeconds - elapsedTimeInSeconds;
 		const hoursLeft = Math.floor(timeLeftInSeconds / 3600);
@@ -68,13 +68,13 @@ export default class Timebox extends React.Component {
 		const progressInPercent = (elapsedTimeInSeconds / totalTimeInSeconds) * 100.0;
 		
 		return (
-			<TimeboxWrapper>
-				<UnhiddenWrapper>
-					<div>{timeboxName}</div>
-					<p>{timeboxTimeInMinutes}min</p>
+			<TimeboxWrapper >
+				<UnhiddenWrapper isActive={isActive} onClick={onSetActiveTimebox}>
+					<h3>{timeboxName}</h3>
+					<p>czas przeznaczony na wykonanie: {timeboxTimeInMinutes}min</p>
 				</UnhiddenWrapper>
-				<WrapperHidden>
-					<Clock
+				<WrapperHidden >
+					<Clock  
 						hoursLeft={hoursLeft}
 						minutesLeft={minutesLeft}
 						secondsLeft={secondsLeft}
@@ -96,30 +96,22 @@ export default class Timebox extends React.Component {
 }
 const UnhiddenWrapper= styled.div`
 	width: 100%;
-&:hover + div {
-	visibility: visible;
-	opacity: 1;
-	height: 196px;
-	transition: visibility 0s, opacity 1s, height 0.1s ease-in-out;
-}
+	& + div {
+	visibility: ${props => props.isActive ? "visible" : "hidden"};
+	opacity: ${props => props.isActive ? "1" : "0"};;
+	height: ${props => props.isActive ? "196px" : "0"};;
+	transition: visibility 0s, opacity 1s height 0.1s ease-in-out;
+	}
 `
+
 const WrapperHidden = styled.div`
-	visibility: hidden; 
-	opacity: 0;
-  height: 0;
-	&:hover {
-	visibility: visible;
-	opacity: 1;
-	height: 196px;
-	transition: visibility 0s, opacity 1s ease-in-out;
-}
-`
+	`
 
 const ButtonWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	padding: 15px;
-`;
+`
 const Button = styled.button`
 	display: flex;
 	justify-content: space-around;
@@ -142,10 +134,28 @@ const Button = styled.button`
 		stroke: #3498db;
 	}
 `;
+// const TimeboxWrapper = styled.div`
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	border: 1px solid grey;
+// 	&:hover {
+// 	border-left: 5px solid #2ecc71
+// }
+// `
 
 const TimeboxWrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border: 1px solid grey;
-`
+display: flex;
+flex-direction: column;
+margin: 2px 0;
+padding: 5px;
+transition: 100ms ease-in-out;
+
+&:hover {
+box-shadow: 1px 1px 3px 1px #ccc;
+transition: 300ms ease-in-out;
+background-color: #f6fafd;
+&:hover > * {
+background-color: #f6fafd;
+}
+}`
