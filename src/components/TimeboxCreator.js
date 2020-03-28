@@ -20,7 +20,7 @@ state = {
   handleCreateNewTimebox = (e) => {
     e.preventDefault();
     this.props.onCreate({
-      id: uuid.v4(),
+      // id: uuid.v4(),
       timeboxName: this.state.newTimeboxName,
       timeboxTimeInMinutes: this.state.newTimeboxTime,
       active: true,

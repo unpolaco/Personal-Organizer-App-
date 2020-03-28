@@ -49,6 +49,6 @@ const TimeboxWrapper = styled.div`
   width: 600px;
   margin-top: 15px;
   padding: 10px;
-  background-color: #fff;
+  /* background-color: #fff; */
   /* border: 1px solid red; */
 `
