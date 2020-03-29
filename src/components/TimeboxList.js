@@ -2,32 +2,9 @@ import React, { Component } from 'react'
 import Timebox from './Timebox'
 import TimeboxCreator from './TimeboxCreator'
 import uuid from 'uuid';
+import TimeboxesAPI from '../api/FetchTimeboxesApi'
 
-const timeboxes = [
-  {id:0, timeboxName: "Pierwszy timebox", timeboxTimeInMinutes: "23", active: false,},
-  {id:1, timeboxName: "Drugi timebox", timeboxTimeInMinutes: "2", active: false},
-  {id:2, timeboxName: "Trzeci timebox", timeboxTimeInMinutes: "12", active: false},
-]
 
-function wait(ms=1000) {
-  return new Promise(
-    (resolve) => {
-      setTimeout(resolve, ms);
-    }
-  )
-}
-const TimeboxesAPI = {
-  getAllTimeboxes: async function() {
-    await wait(2000);
-    return [...timeboxes];
-  },
-  addTimebox: async function(timeboxToAdd) {
-    await wait(1000);
-    const addedTimebox = {...timeboxToAdd, id: uuid.v4()}
-    timeboxes.unshift(addedTimebox);
-    return addedTimebox
-  }
-}
 
 export default class TimeboxList extends Component {
   state = {
@@ -46,10 +23,12 @@ export default class TimeboxList extends Component {
     )
   }
   handleDelete = (indexToDelete) => {
-    this.setState(prevState => {
-      const timeboxes = prevState.timeboxes.filter((timebox, index) => index !== indexToDelete)
-      return { timeboxes }
-    })
+    TimeboxesAPI.deleteTimebox(this.state.timeboxes[indexToDelete]).then(
+      () => this.setState(prevState => {
+        const timeboxes = prevState.timeboxes.filter((timebox, index) => index !== indexToDelete)
+        return { timeboxes }
+      })
+    )
   }
   addTimebox = (timebox) => {
     TimeboxesAPI.addTimebox(timebox).then(
@@ -80,7 +59,7 @@ export default class TimeboxList extends Component {
       <TimeboxCreator 
         onCreate={this.handleCreate}
       />
-        {this.state.loading ? "Poczekaj na wczytanie danych..." : null}
+        {this.state.loading ? "Poczekaj, trwa wczytywanie danych..." : null}
         {this.state.error ? "Wystąpił błąd podczas wczytywania danych..." : null}
         {this.state.timeboxes.map((timebox, index) => (
           <Timebox 
