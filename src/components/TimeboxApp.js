@@ -43,12 +43,4 @@ export default class TimeboxApp extends React.Component {
 }
 
 const TimeboxWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 400px;
-  width: 600px;
-  margin-top: 15px;
-  padding: 10px;
-  /* background-color: #fff; */
-  /* border: 1px solid red; */
 `

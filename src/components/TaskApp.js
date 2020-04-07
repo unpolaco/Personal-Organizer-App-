@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import AddTask from './AddTask';
 import TasksLists from './TaskList';
 import uuid from 'uuid';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import moment from 'moment';
+import { Title } from './Title';
+import { TopPanel } from './TopPanel';
 
 function wait(ms = 1000) {
-	return new Promise(resolve => {
+	return new Promise((resolve) => {
 		setTimeout(resolve, ms);
 	});
 }
@@ -17,8 +19,8 @@ const tasks = [
 		createDate: '',
 		priority: false,
 		done: false,
-		id: 'uuid.v4()',
-		timeToFinishTask: 'za 2 dni'
+		id: uuid.v4(),
+		timeToFinishTask: 'za 2 dni',
 	},
 	{
 		name: 'Poznać React Hooks',
@@ -26,8 +28,8 @@ const tasks = [
 		createDate: '',
 		priority: false,
 		done: true,
-		id: 'uuid.v4()',
-		timeToFinishTask: 'za 2 dni'
+		id: uuid.v4(),
+		timeToFinishTask: 'za 2 dni',
 	},
 	{
 		name: 'Skończyć Task App przed zimą',
@@ -35,21 +37,21 @@ const tasks = [
 		createDate: '',
 		priority: true,
 		done: false,
-		id: 'uuid.v4()',
-		timeToFinishTask: 'za 2 dni'
-	}
+		id: uuid.v4(),
+		timeToFinishTask: 'za 2 dni',
+	},
 ];
 const TasksAPI = {
-	getAllTasks: async function() {
+	getAllTasks: async function () {
 		await wait(1000);
 		return [...tasks];
 	},
-	addTask: async function(taskToAdd) {
-		await wait(2000);
+	addTask: async function (taskToAdd) {
+		await wait(1000);
 		const addedTask = { ...taskToAdd, id: uuid.v4() };
 		tasks.push(addedTask);
 		return addedTask;
-	}
+	},
 };
 
 class TaskApp extends Component {
@@ -58,55 +60,52 @@ class TaskApp extends Component {
 		sortByDateGrowing: false,
 		sortByNameGrowing: false,
 		loading: false,
-		error: null
+		error: null,
 	};
 
 	componentDidMount() {
 		TasksAPI.getAllTasks()
-			.then(tasks => this.setState({ tasks }))
-			.catch(error => this.setState({ error }))
+			.then((tasks) => this.setState({ tasks }))
+			.catch((error) => this.setState({ error }))
 			.finally(() => this.setState({ loading: false }));
 	}
 
-	deleteTask = id => {
+	deleteTask = (id) => {
 		const tasks = [...this.state.tasks];
-		const index = tasks.findIndex(task => task.id === id);
+		const index = tasks.findIndex((task) => task.id === id);
 		tasks.splice(index, 1);
 		this.setState({
-			tasks
+			tasks,
 		});
 	};
-	doneTask = id => {
+	doneTask = (id) => {
 		const tasks = [...this.state.tasks];
-		const index = tasks.findIndex(task => task.id === id);
+		const index = tasks.findIndex((task) => task.id === id);
+		console.log(id);
+
 		tasks[index].done = !tasks[index].done;
 		this.setState({
-			tasks
+			tasks,
 		});
 	};
-	priorityTask = id => {
+	priorityTask = (id) => {
 		const tasks = [...this.state.tasks];
-		const index = tasks.findIndex(task => task.id === id);
+		const index = tasks.findIndex((task) => task.id === id);
 		tasks[index].priority = !tasks[index].priority;
 		this.setState({
-			tasks
+			tasks,
 		});
 	};
-	addNewTask = newTask => {
-		TasksAPI.addTask(newTask).then(addedTask =>
-			this.setState(prevState => {
+	addNewTask = (newTask) => {
+		TasksAPI.addTask(newTask).then((addedTask) =>
+			this.setState((prevState) => {
 				const tasks = [addedTask, ...prevState.tasks];
 				return { tasks };
 			})
 		);
-		const tasks = [...this.state.tasks];
-		tasks.unshift(newTask);
-		this.setState({
-			tasks
-		});
 	};
 
-	nameSorting = sortByGrowing => {
+	nameSorting = (sortByGrowing) => {
 		const tasks = [...this.state.tasks];
 		tasks.sort((a, b) => {
 			if (a.name < b.name) return sortByGrowing ? 1 : -1;
@@ -116,7 +115,7 @@ class TaskApp extends Component {
 
 		this.setState({
 			tasks,
-			sortByNameGrowing: sortByGrowing ? true : false
+			sortByNameGrowing: sortByGrowing ? true : false,
 		});
 	};
 
@@ -127,7 +126,7 @@ class TaskApp extends Component {
 			: this.nameSorting(!sortByGrowing);
 	};
 
-	dateSorting = sortByGrowing => {
+	dateSorting = (sortByGrowing) => {
 		const tasks = [...this.state.tasks];
 		tasks.sort((a, b) => {
 			if (a.finishDate < b.finishDate) return sortByGrowing ? 1 : -1;
@@ -136,7 +135,7 @@ class TaskApp extends Component {
 		});
 		this.setState({
 			tasks,
-			sortByDateGrowing: sortByGrowing ? true : false
+			sortByDateGrowing: sortByGrowing ? true : false,
 		});
 	};
 
@@ -152,10 +151,10 @@ class TaskApp extends Component {
 		const { tasks, sortByDateGrowing, sortByNameGrowing } = this.state;
 		return (
 			<>
-				<div>
-					<Title>MOJA LISTA ZADAŃ</Title>
+				<TopPanel color='#4DB6AC'>
+					<Title>LISTA ZADAŃ</Title>
 					<AddTask now={now} addNewTask={this.addNewTask} />
-				</div>
+				</TopPanel>
 				{this.state.loading ? 'Zadania się ładują. Proszę o cierpliwość' : null}
 				{this.state.error ? 'Nie udało się załadować zapisanych zadań' : null}
 				<TasksLists
@@ -172,10 +171,5 @@ class TaskApp extends Component {
 		);
 	}
 }
-
-const Title = styled.h2`
-	font-size: 25px;
-	color: #3498db;
-`;
 
 export default TaskApp;

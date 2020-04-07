@@ -4,6 +4,8 @@ import uuid from 'uuid'
 import styled from 'styled-components'
 import DownArrowIcon from '../icons/arrowDown'
 import UpArrowIcon from '../icons/arrowUp'
+import { SortingButton } from './Button';
+import { Title } from './Title';
 
 function TaskList(props) {
   const {tasks, sortByNameGrowing, sortByDateGrowing, handlePriorityTask, handleDeleteTask, handleDoneTask, handleSortName, handleSortDate} = props;
@@ -24,52 +26,38 @@ function TaskList(props) {
                 tasks={task}/>)         
   return (
     <TasksLists>
-    <Title>ZADANIA DO ZROBIENIA</Title>
-    <SortingButtonWrapper>
-      <Button onClick={handleSortName}>Sortuj po nazwie{!sortByNameGrowing ? <DownArrowIcon/> : <UpArrowIcon/>}
-      </Button>
-      <Button onClick={handleSortDate}>Sortuj po dacie  {!sortByDateGrowing ? <DownArrowIcon/> : <UpArrowIcon/>}
-      </Button>
-    </SortingButtonWrapper>
-      {activeTasks}   
-    <Title>ZADANIA ZROBIONE</Title>
-      {doneTasks}
+      <Title 
+        size='fontL' 
+        color='#4DB6AC'>ZADANIA DO ZROBIENIA</Title>
+      <SortingButtonWrapper>
+        <SortingButton onClick={handleSortName}>Sortuj po nazwie{!sortByNameGrowing ? <DownArrowIcon/> : <UpArrowIcon/>}
+        </SortingButton>
+        <SortingButton onClick={handleSortDate}>Sortuj po dacie  {!sortByDateGrowing ? <DownArrowIcon/> : <UpArrowIcon/>}
+        </SortingButton>
+      </SortingButtonWrapper>
+        {activeTasks}   
+      <Title 
+        size='fontL' 
+        color='#4DB6AC'>ZADANIA ZROBIONE</Title>
+        {doneTasks}
     </TasksLists>
   )
 }
 
-const Title = styled.h2`
-font-size: 20px;
-color: #34495e;
-`
+
 const TasksLists = styled.div`
   display: flex;
   flex-direction: column;
   height: 400px;
-  margin-top: 15px;
+  margin: 180px auto 0 auto;
   padding: 10px;
-  background-color: #fff;
+  width: 80%;
+  min-width: 800px;
+  max-width: 1000px;
 `
 const SortingButtonWrapper= styled.div`
   display: flex;
   justify-content: flex-end;
 `
-const Button = styled.button`
-  width: 200px;
-  height: 25px;
-  text-align: left;
-  border: none;
-  color: #34495e;
-  font-size: 15px;
- 
-  & > * {
-    fill: #34495e;
-    /* stroke: #34495e; */
- 
-}
-  &:hover > * {
-    fill: #3498db;
-    /* stroke: #3498db; */
-}
-`
+
 export default TaskList;

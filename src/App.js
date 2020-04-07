@@ -1,70 +1,88 @@
 import React, { Component } from 'react';
-import { createGlobalStyle } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import moment from 'moment';
 import ActualDate from './components/ActualDate';
 import TimeboxApp from './components/TimeboxApp';
 import TaskApp from './components/TaskApp';
+import GlobalStyle from './theme/GlobalStyle';
+import { theme } from './theme/mainTheme';
+import { SideBarButton } from './components/Button';
 
 function wait(ms = 1000) {
-	return new Promise(resolve => {
+	return new Promise((resolve) => {
 		setTimeout(resolve, ms);
 	});
 }
 
 class App extends Component {
 	state = {
-		timebox: true,
-		taskList: false
+		timebox: false,
+		taskList: true,
 	};
 
 	showTimebox = () => {
 		this.setState({
 			timebox: !this.state.timebox,
-			taskList: !this.state.taskList
+			taskList: !this.state.taskList,
 		});
 	};
 	showTaskList = () => {
 		this.setState({
 			timebox: !this.state.timebox,
-			taskList: !this.state.taskList
+			taskList: !this.state.taskList,
 		});
 	};
 
 	render() {
 		const now = moment(new Date());
 		return (
-			<>
+			<Wrapper>
 				<GlobalStyle />
-				<ActualDate now={now} />
-				<button onClick={this.showTimebox}>TIMEBOX</button>
-				<button onClick={this.showTaskList}>MOJA LISTA ZADAŃ</button>
-				{this.state.timebox ? <TimeboxApp /> : null}
-				{this.state.taskList ? <TaskApp /> : null}
-			</>
+				<ThemeProvider theme={theme}>
+					<>
+						<SideBar>
+							<ActualDate now={now} />
+							<SideBarButton
+								onClick={this.showTaskList}
+								disabled={this.state.taskList}
+							>
+								LISTA ZADAŃ
+							</SideBarButton>
+							<SideBarButton
+								onClick={this.showTimebox}
+								disabled={this.state.timebox}
+							>
+								TIMEBOXY
+							</SideBarButton>
+						</SideBar>
+						<MainSection>
+							{this.state.taskList ? <TaskApp /> : null}
+							{this.state.timebox ? <TimeboxApp /> : null}
+						</MainSection>
+					</>
+				</ThemeProvider>
+			</Wrapper>
 		);
 	}
 }
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #ecf0f1;
-    text-align: center;
-  & > * {
-    font-size: 15px;
-    font-family: 'Nunito', sans-serif;
-    color: #34495e;
-  }
-  * :focus {
-   outline: none; 
-  }
-}
-`
-
+const Wrapper = styled.div`
+	display: flex;
+`;
+const SideBar = styled.div`
+	display: flex;
+	flex-direction: column;
+	background-color: #263238;
+	position: fixed;
+	height: 100vh;
+`;
+const MainSection = styled.div`
+	margin-left: 200px;
+	min-width: 800px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	align-content: center;
+`;
 
 export default App;

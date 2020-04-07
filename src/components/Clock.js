@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Text } from './Text';
 
 export default function Clock(props) {
   const { hoursLeft, minutesLeft, secondsLeft, progressInPercent } = props;
@@ -10,7 +11,7 @@ export default function Clock(props) {
 
   return (
     <ClockWrapper>
-      <p>Pozostało {hh}:{mm}:{ss}</p>
+      <Text>Pozostało {hh}:{mm}:{ss}</Text>
       <ProgressBar>
         <ProgressIndicator style={{width: `${progressInPercent}%`}}></ProgressIndicator>
       </ProgressBar>
@@ -21,18 +22,18 @@ const ClockWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 600px;
 `
 const ProgressBar = styled.div`
-  border: 1px solid #3498db;
+  border: 1px solid ${({ theme }) => theme.lime600};
   height: 25px;
   width: 80%;
   padding: 5px;
 `
 const ProgressIndicator = styled.div`
-  height: 25px;
-  width: 40%;
-  background-color: #3498db;
+  height: 13px;
+  width: 0;
+  background-color: ${({ theme }) => theme.lime600};
 `
 
 

@@ -3,8 +3,7 @@ import Timebox from './Timebox'
 import TimeboxCreator from './TimeboxCreator'
 import uuid from 'uuid';
 import TimeboxesAPI from '../api/FetchTimeboxesApi'
-
-
+import styled from 'styled-components';
 
 export default class TimeboxList extends Component {
   state = {
@@ -34,7 +33,7 @@ export default class TimeboxList extends Component {
     TimeboxesAPI.addTimebox(timebox).then(
       (addedTimebox) => this.setState(prevState => {
         const timeboxes = [addedTimebox, ...prevState.timeboxes]
-        return { timeboxes };
+        return {timeboxes} ;
       })
     )
   }
@@ -59,6 +58,7 @@ export default class TimeboxList extends Component {
       <TimeboxCreator 
         onCreate={this.handleCreate}
       />
+      <TimeboxListWrapper>
         {this.state.loading ? "Poczekaj, trwa wczytywanie danych..." : null}
         {this.state.error ? "Wystąpił błąd podczas wczytywania danych..." : null}
         {this.state.timeboxes.map((timebox, index) => (
@@ -71,7 +71,12 @@ export default class TimeboxList extends Component {
             onSetActiveTimebox={() => this.handleSetActiveTimebox(index)}
           />
         ))}
+      </TimeboxListWrapper>
       </>
     )
   }
 }
+
+const TimeboxListWrapper = styled.div`
+margin-top: 180px;
+`

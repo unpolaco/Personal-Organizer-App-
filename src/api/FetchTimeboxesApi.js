@@ -1,11 +1,13 @@
+const BASE_URL = "http://localhost:3000/timeboxes"
+
 const FetchTimeboxesAPI = {
   getAllTimeboxes: async function() {
-    const response = await makeRequest(`http://localhost:3000/timeboxes`, "GET")
+    const response = await makeRequest(`${BASE_URL}`, "GET")
     const timeboxes = await response.json();
     return timeboxes;
   },
   addTimebox: async function(timeboxToAdd) {
-    const response = await makeRequest(`http://localhost:3000/timeboxes`, "POST", timeboxToAdd)
+    const response = await makeRequest(`${BASE_URL}`, "POST", timeboxToAdd)
     const addedTimebox = await response.json();
     return addedTimebox;
   },
@@ -13,7 +15,7 @@ const FetchTimeboxesAPI = {
     if (!timeboxToDelete.id) {
       throw new Error("Nie udało się skasować timeboxa :(")
     }
-    await makeRequest(`http://localhost:3000/timeboxes/${timeboxToDelete.id}`, "DELETE")
+    await makeRequest(`${BASE_URL}/${timeboxToDelete.id}`, "DELETE")
   }
 }
 export default FetchTimeboxesAPI;
