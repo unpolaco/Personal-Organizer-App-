@@ -2,10 +2,10 @@ import React from 'react'
 import Task from './Task'
 import uuid from 'uuid'
 import styled from 'styled-components'
-import DownArrowIcon from '../icons/arrowDown'
-import UpArrowIcon from '../icons/arrowUp'
-import { SortingButton } from './Button';
-import { Title } from './Title';
+import DownArrowIcon from '../../icons/arrowDown'
+import UpArrowIcon from '../../icons/arrowUp'
+import { SortingButton } from '../other/Button';
+import { Title } from '../other/Title';
 
 function TaskList(props) {
   const {tasks, sortByNameGrowing, sortByDateGrowing, handlePriorityTask, handleDeleteTask, handleDoneTask, handleSortName, handleSortDate} = props;

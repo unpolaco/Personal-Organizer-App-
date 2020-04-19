@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Text } from './Text';
+import { Text } from '../other/Text';
 
 export default function Clock(props) {
   const { hoursLeft, minutesLeft, secondsLeft, progressInPercent } = props;

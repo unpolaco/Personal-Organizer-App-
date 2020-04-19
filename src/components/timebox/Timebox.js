@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Clock from './Clock';
-import startIcon from '../icons/materialIcons/icon-play.svg';
-import pauseIcon from '../icons/materialIcons/icon-pause.svg';
-import stopIcon from '../icons/materialIcons/icon-stop.svg';
-import deleteIcon from '../icons/materialIcons/icon-delete.svg';
-import { IconButton } from './Button';
-import { Text, TextBig } from './Text';
+import startIcon from '../../icons/materialIcons/icon-play.svg';
+import pauseIcon from '../../icons/materialIcons/icon-pause.svg';
+import stopIcon from '../../icons/materialIcons/icon-stop.svg';
+import deleteIcon from '../../icons/materialIcons/icon-delete.svg';
+import { IconButton } from '../other/Button';
+import { Text, TextBig } from '../other/Text';
 
 export default class Timebox extends React.Component {
 	state = {

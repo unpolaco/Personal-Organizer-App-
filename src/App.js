@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import moment from 'moment';
-import ActualDate from './components/ActualDate';
-import TimeboxApp from './components/TimeboxApp';
-import TaskApp from './components/TaskApp';
+import ActualDate from './components/date/ActualDate';
+import TimeboxApp from './components/timebox/TimeboxApp';
+import TaskApp from './components/task/TaskApp';
 import GlobalStyle from './theme/GlobalStyle';
 import { theme } from './theme/mainTheme';
-import { SideBarButton } from './components/Button';
+import { SideBarButton } from './components/other/Button';
 
 function wait(ms = 1000) {
 	return new Promise((resolve) => {

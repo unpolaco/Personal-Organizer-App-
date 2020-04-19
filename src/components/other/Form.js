@@ -7,7 +7,6 @@ const Form = styled.form`
 	margin: 0 auto;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid green;
 `;
 
 export { Form };

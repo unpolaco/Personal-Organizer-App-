@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import AddIcon from '../icons/add'
-import { SubmitButton } from './Button';
-import { Input } from './Input';
-import { AnimatedLabel } from './Label';
-import { FieldSet } from './FieldSet';
-import { Form } from './Form';
-import { Title } from './Title';
-import { TopPanel } from './TopPanel';
+import AddIcon from '../../icons/add'
+import { SubmitButton } from '../other/Button';
+import { Input } from '../other/Input';
+import { AnimatedLabel } from '../other/Label';
+import { FieldSet } from '../other/FieldSet';
+import { Form } from '../other/Form';
+import { Title } from '../other/Title';
+import { TopPanel } from '../other/TopPanel';
 
 
 export default class TimeboxCreator extends Component {

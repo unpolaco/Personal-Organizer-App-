@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import AddTask from './AddTask';
 import TasksLists from './TaskList';
 import uuid from 'uuid';
-import styled from 'styled-components';
 import moment from 'moment';
-import { Title } from './Title';
-import { TopPanel } from './TopPanel';
+import { Title } from '../other/Title';
+import { TopPanel } from '../other/TopPanel';
 
 function wait(ms = 1000) {
 	return new Promise((resolve) => {

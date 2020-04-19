@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 import moment from 'moment';
-import AddIcon from '../icons/add';
-import calendarIcon from '../icons/materialIcons/calendar.svg';
-import starIcon from '../icons/materialIcons/star-black.svg';
-import starIconOutline from '../icons/materialIcons/star-border.svg';
-import { SubmitButton } from './Button';
-import { Input, InputDate, CheckboxInput } from './Input';
-import { Label, AnimatedLabel, IconLabel } from './Label';
-import { FieldSet, CheckboxFieldSet } from './FieldSet';
-import { Form } from './Form';
+import AddIcon from '../../icons/add';
+import calendarIcon from '../../icons/materialIcons/calendar.svg';
+import starIcon from '../../icons/materialIcons/star-black.svg';
+import starIconOutline from '../../icons/materialIcons/star-border.svg';
+import { SubmitButton } from '../other/Button';
+import { Input, InputDate, CheckboxInput } from '../other/Input';
+import { AnimatedLabel, IconLabel } from '../other/Label';
+import { FieldSet, CheckboxFieldSet } from '../other/FieldSet';
+import { Form } from '../other/Form';
 
 class AddTask extends Component {
 	state = {

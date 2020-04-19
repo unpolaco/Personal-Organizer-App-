@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import checkmarkIcon from '../icons/materialIcons/check_circle.svg';
-import starIcon from '../icons/materialIcons/star-black.svg';
-import deleteIcon from '../icons/materialIcons/delete-black.svg';
-import { IconButton } from './Button';
-import { Text, TextBig } from './Text';
+import checkmarkIcon from '../../icons/materialIcons/check_circle.svg';
+import starIcon from '../../icons/materialIcons/star-black.svg';
+import deleteIcon from '../../icons/materialIcons/delete-black.svg';
+import { IconButton } from '../other/Button';
+import { Text, TextBig } from '../other/Text';
 
 function Task(props) {
 	const { name, priority, finishDate, timeToFinishTask, id } = props.tasks;
